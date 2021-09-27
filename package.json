@@ -31,6 +31,7 @@
     "bcrypt": "^5.0.1",
     "bull": "^3.29.2",
     "cache-manager": "^3.4.4",
+    "cache-manager-redis-store": "^2.0.0",
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "mysql2": "^2.3.0",
