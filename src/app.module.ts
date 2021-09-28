@@ -23,7 +23,7 @@ dotenv.config();
     CacheModule.register({
       store: redisStore,
       host: process.env.RD_HOST,
-      port: parseInt(process.env.RD_PORT) || 379,
+      port: parseInt(process.env.RD_PORT) || 6379,
     }),
     BullModule.forRoot({
 
