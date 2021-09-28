@@ -1,27 +1,32 @@
 import { CacheModule, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './user/models/user.entity';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import * as redisStore from 'cache-manager-redis-store';
 import { BullModule } from '@nestjs/bull';
+import * as redisStore from 'cache-manager-redis-store';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'training',
-      password: 'training',
-      database: 'ideal_train',
-      entities: ["dist/**/*.entity{.ts,.js}"],
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT) || 3306,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      entities: ['dist/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     CacheModule.register({
       store: redisStore,
-      host: 'localhost',
-      port: 6379,
+      host: process.env.RD_HOST,
+      port: parseInt(process.env.RD_PORT) || 379,
+    }),
+    BullModule.forRoot({
+
     }),
     UserModule,
     AuthModule
