@@ -20,6 +20,9 @@ export class User {
     @Column({default: Role.USER})
     role: Role;
 
+    @Column({default: false})
+    confirmed: boolean;
+
     @CreateDateColumn()
     created_at: Date;
 

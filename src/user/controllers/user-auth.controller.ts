@@ -18,4 +18,9 @@ export class UserAuthController {
   loginUser(@Body() loginUserDto: LoginUserDto): Promise<string> {
     return this.userService.loginUser(loginUserDto);
   }
+
+  @Get('confirm/:token')
+  confirmUser(@Param('token') token: string): Promise<any> {
+    return this.userService.confirmEmail(token);
+  }
 }
